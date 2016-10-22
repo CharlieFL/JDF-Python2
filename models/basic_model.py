@@ -36,6 +36,8 @@ num_channels = 3
 
 config_name = 'local_normal_' + str(output_size)
 
+#model_name = ""
+
 #prefix_train = '/media/user/Extended_ext4/train_ds2_crop/'
 #prefix_test = '/media/user/Extended_ext4/test_ds2_crop/'
 
@@ -147,6 +149,8 @@ momentum = 0.90
 
 
 def build_model():
+    #model_name = "base model"
+    
     layers = []
 
     l_in_imgdim = nn.layers.InputLayer(
@@ -196,14 +200,6 @@ def build_model():
                          untie_biases=True)
     layers.append(l_conv)
 
-    # l_conv = Conv2DLayer(layers[-1],
-    #                      num_filters=32, filter_size=(3, 3), stride=(1, 1),
-    #                      pad='same',
-    #                      nonlinearity=LeakyRectify(leakiness),
-    #                      W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-    #                      untie_biases=True,
-    #                      learning_rate_scale=1.0)
-    # layers.append(l_conv)
 
     #layer 5
     l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
@@ -228,14 +224,6 @@ def build_model():
                          untie_biases=True)
     layers.append(l_conv)
 
-    # l_conv = Conv2DLayer(layers[-1],
-    #                      num_filters=64, filter_size=(3, 3), stride=(1, 1),
-    #                      pad='same',
-    #                      nonlinearity=LeakyRectify(leakiness),
-    #                      W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-    #                      untie_biases=True,
-    #                      learning_rate_scale=1.0)
-    # layers.append(l_conv)
 
     l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
     layers.append(l_pool)
@@ -402,6 +390,9 @@ def build_LUCERO_model_1():
   32  ApplyNonlinearity            (64, 5)  
     Inserted Max pool at layer 10-11
     '''
+    
+    #model_name = "L1"
+    
     layers = []
 
     l_in_imgdim = nn.layers.InputLayer(
@@ -451,14 +442,6 @@ def build_LUCERO_model_1():
                          untie_biases=True)
     layers.append(l_conv)
 
-    # l_conv = Conv2DLayer(layers[-1],
-    #                      num_filters=32, filter_size=(3, 3), stride=(1, 1),
-    #                      pad='same',
-    #                      nonlinearity=LeakyRectify(leakiness),
-    #                      W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-    #                      untie_biases=True,
-    #                      learning_rate_scale=1.0)
-    # layers.append(l_conv)
 
     #layer 5
     l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
@@ -483,14 +466,6 @@ def build_LUCERO_model_1():
                          untie_biases=True)
     layers.append(l_conv)
 
-    # l_conv = Conv2DLayer(layers[-1],
-    #                      num_filters=64, filter_size=(3, 3), stride=(1, 1),
-    #                      pad='same',
-    #                      nonlinearity=LeakyRectify(leakiness),
-    #                      W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-    #                      untie_biases=True,
-    #                      learning_rate_scale=1.0)
-    # layers.append(l_conv)
 
     #layer 8
     l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
@@ -662,6 +637,8 @@ def build_LUCERO_model_2(): #9mill params
                 Number of trainable parameters: 9202218
 
     '''
+   #model_name = "L2"
+    
     layers = []
 
     l_in_imgdim = nn.layers.InputLayer(
@@ -711,14 +688,6 @@ def build_LUCERO_model_2(): #9mill params
                          untie_biases=True)
     layers.append(l_conv)
 
-    # l_conv = Conv2DLayer(layers[-1],
-    #                      num_filters=32, filter_size=(3, 3), stride=(1, 1),
-    #                      pad='same',
-    #                      nonlinearity=LeakyRectify(leakiness),
-    #                      W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-    #                      untie_biases=True,
-    #                      learning_rate_scale=1.0)
-    # layers.append(l_conv)
 
     #layer 5
     l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
@@ -743,14 +712,6 @@ def build_LUCERO_model_2(): #9mill params
                          untie_biases=True)
     layers.append(l_conv)
 
-    # l_conv = Conv2DLayer(layers[-1],
-    #                      num_filters=64, filter_size=(3, 3), stride=(1, 1),
-    #                      pad='same',
-    #                      nonlinearity=LeakyRectify(leakiness),
-    #                      W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-    #                      untie_biases=True,
-    #                      learning_rate_scale=1.0)
-    # layers.append(l_conv)
 
     #layer 8
     l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
@@ -777,24 +738,7 @@ def build_LUCERO_model_2(): #9mill params
     l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
     layers.append(l_pool)
 # 
-#     l_conv = Conv2DLayer(layers[-1],
-#                          num_filters=128, filter_size=(3, 3), stride=(1, 1),
-#                          pad='same',
-#                          nonlinearity=LeakyRectify(leakiness),
-#                          W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-#                          untie_biases=True)
-#     layers.append(l_conv)
-# 
-#     l_conv = Conv2DLayer(layers[-1],
-#                          num_filters=128, filter_size=(3, 3), stride=(1, 1),
-#                          pad='same',
-#                          nonlinearity=LeakyRectify(leakiness),
-#                          W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-#                          untie_biases=True)
-#     layers.append(l_conv)
-# 
-#     l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
-#     layers.append(l_pool)
+
 
     l_conv = Conv2DLayer(layers[-1],
                          num_filters=256, filter_size=(3, 3), stride=(1, 1),
@@ -817,13 +761,7 @@ def build_LUCERO_model_2(): #9mill params
     l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
     layers.append(l_pool)
 
-#     l_conv = Conv2DLayer(layers[-1],
-#                          num_filters=256, filter_size=(3, 3), stride=(1, 1),
-#                          pad='same',
-#                          nonlinearity=LeakyRectify(leakiness),
-#                          W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-#                          untie_biases=True)
-#     layers.append(l_conv)
+
 
     l_conv = Conv2DLayer(layers[-1],
                          num_filters=256, filter_size=(3, 3), stride=(1, 1),
@@ -933,6 +871,7 @@ def build_LUCERO_model_3():
 
     '''
     
+    #model_name = "L3"
     
     layers = []
 
@@ -991,14 +930,6 @@ def build_LUCERO_model_3():
     layers.append(l_conv)
     
 
-    # l_conv = Conv2DLayer(layers[-1],
-    #                      num_filters=32, filter_size=(3, 3), stride=(1, 1),
-    #                      pad='same',
-    #                      nonlinearity=LeakyRectify(leakiness),
-    #                      W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-    #                      untie_biases=True,
-    #                      learning_rate_scale=1.0)
-    # layers.append(l_conv)
 
     #layer 5
     l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
@@ -1031,14 +962,7 @@ def build_LUCERO_model_3():
                          untie_biases=True)
     layers.append(l_conv)
 
-    # l_conv = Conv2DLayer(layers[-1],
-    #                      num_filters=64, filter_size=(3, 3), stride=(1, 1),
-    #                      pad='same',
-    #                      nonlinearity=LeakyRectify(leakiness),
-    #                      W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-    #                      untie_biases=True,
-    #                      learning_rate_scale=1.0)
-    # layers.append(l_conv)
+
 
     l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
     layers.append(l_pool)
@@ -1173,6 +1097,8 @@ def build_LUCERO_model_4(): #8.7mill 128 chunk, 64 batch
     Layer 1 changed filter from 
     Inserted Max pool at layer 10-11
     '''
+    
+    #model_name = "L4" 
     layers = []
 
     l_in_imgdim = nn.layers.InputLayer(
@@ -1354,6 +1280,8 @@ def build_LUCERO_model_5(): #35.3mill
   20  ReshapeLayer                 (64, 5)  
   21  ApplyNonlinearity            (64, 5)  
     '''
+    
+    #model_name = "L5"
     layers = []
 
     l_in_imgdim = nn.layers.InputLayer(
@@ -1478,17 +1406,6 @@ def build_LUCERO_model_5(): #35.3mill
     layers.append(
         nn.layers.ReshapeLayer(layers[-1], shape=((batch_size) // 2, -1)))
 
-#     layers.append(nn.layers.DropoutLayer(layers[-1], p=0.5))
-#     layers.append(nn.layers.DenseLayer(layers[-1],
-#                                        nonlinearity=None,
-#                                        num_units=1024,
-#                                        W=nn.init.Orthogonal(1.0),
-#                                        b=nn.init.Constant(0.1),
-#                                        name='combine_repr_fc'))
-#     l_pool = nn.layers.FeaturePoolLayer(layers[-1],
-#                                         pool_size=2,
-#                                         pool_function=T.max)
-#     layers.append(l_pool)
 
     l_hidden = nn.layers.DenseLayer(nn.layers.DropoutLayer(layers[-1], p=0.5),
                                     num_units=output_dim * 2,
@@ -1509,6 +1426,541 @@ def build_LUCERO_model_5(): #35.3mill
     l_ins = [l_in1, l_in_imgdim]
 
     return l_out, l_ins
+
+
+def build_LUCERO_model_6():
+    '''
+   0  InputLayer                   (64, 3, 512, 512)  
+   1  Conv2DDNNLayer               (64, 32, 256, 256)  7 //2
+   2  MaxPool2DDNNLayer            (64, 32, 127, 127)  3 //2
+   3  Conv2DDNNLayer               (64, 32, 127, 127)  3 //1
+   4  DropoutLayer                 (64, 32, 127, 127)   [0.40]
+   5  Conv2DDNNLayer               (64, 32, 127, 127)  3 //1
+   6  MaxPool2DDNNLayer            (64, 32, 63, 63)  3 //2
+   7  Conv2DDNNLayer               (64, 64, 63, 63)  3 //1
+   8  DropoutLayer                 (64, 64, 63, 63)   [0.40]
+   9  Conv2DDNNLayer               (64, 64, 63, 63)  3 //1
+  10  DropoutLayer                 (64, 64, 63, 63)   [0.40]
+  11  Conv2DDNNLayer               (64, 64, 63, 63)  3 //1
+  12  MaxPool2DDNNLayer            (64, 64, 31, 31)  3 //2
+  13  Conv2DDNNLayer               (64, 128, 31, 31)  3 //1
+  14  DropoutLayer                 (64, 128, 31, 31)   [0.40]
+  15  Conv2DDNNLayer               (64, 128, 31, 31)  3 //1
+  16  DropoutLayer                 (64, 128, 31, 31)   [0.40]
+  17  Conv2DDNNLayer               (64, 128, 31, 31)  3 //1
+  18  MaxPool2DDNNLayer            (64, 128, 15, 15)  3 //2
+  19  Conv2DDNNLayer               (64, 128, 15, 15)  3 //1
+  20  DropoutLayer                 (64, 128, 15, 15)   [0.40]
+  21  Conv2DDNNLayer               (64, 128, 15, 15)  3 //1
+  22  DropoutLayer                 (64, 128, 15, 15)   [0.40]
+  23  Conv2DDNNLayer               (64, 128, 15, 15)  3 //1
+  24  DropoutLayer                 (64, 128, 15, 15)   [0.40]
+  25  Conv2DDNNLayer               (64, 128, 15, 15)  3 //1
+  26  MaxPool2DDNNLayer            (64, 128, 7, 7)  3 //2
+  27  Conv2DDNNLayer               (64, 256, 7, 7)  3 //1
+  28  DropoutLayer                 (64, 256, 7, 7)   [0.40]
+  29  Conv2DDNNLayer               (64, 256, 7, 7)  3 //1
+  30  DropoutLayer                 (64, 256, 7, 7)   [0.40]
+  31  Conv2DDNNLayer               (64, 256, 7, 7)  3 //1
+  32  DropoutLayer                 (64, 256, 7, 7)   [0.40]
+  33  Conv2DDNNLayer               (64, 256, 7, 7)  3 //1
+  34  DropoutLayer                 (64, 256, 7, 7)   [0.40]
+  35  Conv2DDNNLayer               (64, 256, 7, 7)  3 //1
+  36  MaxPool2DDNNLayer            (64, 256, 3, 3)  3 //2
+  37  DropoutLayer                 (64, 256, 3, 3)   [0.50]
+  38  DenseLayer                   (64, 1024)  
+  39  FeaturePoolLayer             (64, 512)  2 //
+  40  InputLayer                   (64, 2)  
+  41  ConcatLayer                  (64, 514)  
+  42  ReshapeLayer                 (32, 1028)  
+  43  DropoutLayer                 (32, 1028)   [0.50]
+  44  DenseLayer                   (32, 1024)  
+  45  FeaturePoolLayer             (32, 512)  2 //
+  46  DropoutLayer                 (32, 512)   [0.50]
+  47  DenseLayer                   (32, 10)  
+  48  ReshapeLayer                 (64, 5)  
+  49  ApplyNonlinearity            (64, 5)  
+
+
+        Number of trainable parameters: 11585514
+    '''
+    
+    #model_name = "L6"
+    layers = []
+
+    l_in_imgdim = nn.layers.InputLayer(
+        shape=(batch_size, 2),
+        name='imgdim'
+    )
+
+    #layer 0
+    l_in1 = nn.layers.InputLayer(
+        shape=(batch_size, num_channels, input_width, input_height),
+        name='images'
+    )
+    layers.append(l_in1)
+
+    Conv2DLayer = dnn.Conv2DDNNLayer
+    MaxPool2DLayer = dnn.MaxPool2DDNNLayer
+    DenseLayer = nn.layers.DenseLayer
+
+    #C1
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=32, filter_size=(7, 7), stride=(2,2),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+        
+    #layer 2
+    l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
+    layers.append(l_pool)
+
+    #C2-3
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=32, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
+    
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=32, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+
+    #layer 5
+    l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
+    layers.append(l_pool)
+    
+    ##C4-6
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=64, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
+
+    #layer 7
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=64, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=64, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    #layer 8
+    l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
+    layers.append(l_pool)
+
+    ##C7-9
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=128, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
+
+    #layer 10
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=128, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+ 
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
+    
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=128, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)    
+
+    l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
+    layers.append(l_pool)
+
+    
+    #C10-13
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=128, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=128, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+    
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=128, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=128, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)    
+
+    l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
+    layers.append(l_pool)
+    
+    #C14-18
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=256, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=256, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=256, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=256, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+    
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
+    
+    l_conv = Conv2DLayer(layers[-1],
+                     num_filters=256, filter_size=(3, 3), stride=(1, 1),
+                     pad='same',
+                     nonlinearity=LeakyRectify(leakiness),
+                     W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                     untie_biases=True)
+    layers.append(l_conv)
+    l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2),
+                            name='coarse_last_pool')
+    layers.append(l_pool)
+
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.5))
+    layers.append(DenseLayer(layers[-1],
+                             nonlinearity=None,
+                             num_units=1024,
+                             W=nn.init.Orthogonal(1.0),
+                             b=nn.init.Constant(0.1),
+                             name='first_fc_0'))
+    l_pool = nn.layers.FeaturePoolLayer(layers[-1],
+                                        pool_size=2,
+                                        pool_function=T.max)
+    layers.append(l_pool)
+
+    l_first_repr = layers[-1]
+
+    l_coarse_repr = nn.layers.concat([l_first_repr,
+                                      l_in_imgdim])
+    layers.append(l_coarse_repr)
+
+    # Combine representations of both eyes.
+    layers.append(
+        nn.layers.ReshapeLayer(layers[-1], shape=(batch_size // 2, -1)))
+
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.5))
+    layers.append(nn.layers.DenseLayer(layers[-1],
+                                       nonlinearity=None,
+                                       num_units=1024,
+                                       W=nn.init.Orthogonal(1.0),
+                                       b=nn.init.Constant(0.1),
+                                       name='combine_repr_fc'))
+    l_pool = nn.layers.FeaturePoolLayer(layers[-1],
+                                        pool_size=2,
+                                        pool_function=T.max)
+    layers.append(l_pool)
+
+    l_hidden = nn.layers.DenseLayer(nn.layers.DropoutLayer(layers[-1], p=0.5),
+                                    num_units=output_dim * 2,
+                                    nonlinearity=None,  # No softmax yet!
+                                    W=nn.init.Orthogonal(1.0),
+                                    b=nn.init.Constant(0.1))
+    layers.append(l_hidden)
+
+    # Reshape back to 5.
+    layers.append(nn.layers.ReshapeLayer(layers[-1],
+                                         shape=(batch_size, 5)))
+
+    # Apply softmax.
+    l_out = ApplyNonlinearity(layers[-1],
+                              nonlinearity=nn.nonlinearities.softmax)
+    layers.append(l_out)
+
+    l_ins = [l_in1, l_in_imgdim]
+
+    return l_out, l_ins
+
+def build_LUCERO_model_7():
+    
+    #model_name = "L7"
+    layers = []
+
+    l_in_imgdim = nn.layers.InputLayer(
+        shape=(batch_size, 2),
+        name='imgdim'
+    )
+
+    #layer 0
+    l_in1 = nn.layers.InputLayer(
+        shape=(batch_size, num_channels, input_width, input_height),
+        name='images'
+    )
+    layers.append(l_in1)
+
+    Conv2DLayer = dnn.Conv2DDNNLayer
+    MaxPool2DLayer = dnn.MaxPool2DDNNLayer
+    DenseLayer = nn.layers.DenseLayer
+
+    #layer 1
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=32, filter_size=(7, 7), stride=(2, 2),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+    
+    #layer 2
+    l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
+    layers.append(l_pool)
+
+    #layer 3
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=32, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    #layer 4
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=32, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+
+    #layer 5
+    l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
+    layers.append(l_pool)
+
+    
+    #layer 6
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=64, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    #layer 7
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=64, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+
+    l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
+    layers.append(l_pool)
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=128, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=128, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=128, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=128, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
+    layers.append(l_pool)
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=256, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=256, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=256, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=256, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+    l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2),
+                            name='coarse_last_pool')
+    layers.append(l_pool)
+
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.5))
+    layers.append(DenseLayer(layers[-1],
+                             nonlinearity=None,
+                             num_units=1024,
+                             W=nn.init.Orthogonal(1.0),
+                             b=nn.init.Constant(0.1),
+                             name='first_fc_0'))
+    l_pool = nn.layers.FeaturePoolLayer(layers[-1],
+                                        pool_size=2,
+                                        pool_function=T.max)
+    layers.append(l_pool)
+
+    l_first_repr = layers[-1]
+
+    l_coarse_repr = nn.layers.concat([l_first_repr,
+                                      l_in_imgdim])
+    layers.append(l_coarse_repr)
+
+    # Combine representations of both eyes.
+    layers.append(
+        nn.layers.ReshapeLayer(layers[-1], shape=(batch_size // 2, -1)))
+
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.5))
+    layers.append(nn.layers.DenseLayer(layers[-1],
+                                       nonlinearity=None,
+                                       num_units=1024,
+                                       W=nn.init.Orthogonal(1.0),
+                                       b=nn.init.Constant(0.1),
+                                       name='combine_repr_fc'))
+    l_pool = nn.layers.FeaturePoolLayer(layers[-1],
+                                        pool_size=2,
+                                        pool_function=T.max)
+    layers.append(l_pool)
+
+    l_hidden = nn.layers.DenseLayer(nn.layers.DropoutLayer(layers[-1], p=0.5),
+                                    num_units=output_dim * 2,
+                                    nonlinearity=None,  # No softmax yet!
+                                    W=nn.init.Orthogonal(1.0),
+                                    b=nn.init.Constant(0.1))
+    layers.append(l_hidden)
+
+    # Reshape back to 5.
+    layers.append(nn.layers.ReshapeLayer(layers[-1],
+                                         shape=(batch_size, 5)))
+
+    # Apply softmax.
+    l_out = ApplyNonlinearity(layers[-1],
+                              nonlinearity=nn.nonlinearities.softmax)
+    layers.append(l_out)
+
+    l_ins = [l_in1, l_in_imgdim]
+
+    return l_out, l_ins
+
 
 
 
@@ -1654,6 +2106,7 @@ if pl_enabled:
     images_valid_eval = id_valid[:]
     labels_valid_eval = y_valid[:].astype('int32')
 else:
+    #oversample training/labels based on coefficients
     id_train_oversample, labels_train_oversample = oversample_set(id_train,
                                                                   y_train,
                                                                   sample_coefs)
