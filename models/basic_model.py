@@ -1758,7 +1758,52 @@ def build_LUCERO_model_6():
     return l_out, l_ins
 
 def build_LUCERO_model_7():
-    
+    '''
+   0  InputLayer                   (64, 3, 512, 512)  
+   1  Conv2DDNNLayer               (64, 32, 256, 256)  7 //2
+   2  MaxPool2DDNNLayer            (64, 32, 127, 127)  3 //2
+   3  Conv2DDNNLayer               (64, 32, 127, 127)  3 //1
+   4  DropoutLayer                 (64, 32, 127, 127)   [0.40]
+   5  Conv2DDNNLayer               (64, 32, 127, 127)  3 //1
+   6  MaxPool2DDNNLayer            (64, 32, 63, 63)  3 //2
+   7  Conv2DDNNLayer               (64, 64, 63, 63)  3 //1
+   8  DropoutLayer                 (64, 64, 63, 63)   [0.40]
+   9  Conv2DDNNLayer               (64, 64, 63, 63)  3 //1
+  10  MaxPool2DDNNLayer            (64, 64, 31, 31)  3 //2
+  11  Conv2DDNNLayer               (64, 128, 31, 31)  3 //1
+  12  DropoutLayer                 (64, 128, 31, 31)   [0.40]
+  13  Conv2DDNNLayer               (64, 128, 31, 31)  3 //1
+  14  DropoutLayer                 (64, 128, 31, 31)   [0.40]
+  15  Conv2DDNNLayer               (64, 128, 31, 31)  3 //1
+  16  DropoutLayer                 (64, 128, 31, 31)   [0.40]
+  17  Conv2DDNNLayer               (64, 128, 31, 31)  3 //1
+  18  MaxPool2DDNNLayer            (64, 128, 15, 15)  3 //2
+  19  Conv2DDNNLayer               (64, 256, 15, 15)  3 //1
+  20  DropoutLayer                 (64, 256, 15, 15)   [0.40]
+  21  Conv2DDNNLayer               (64, 256, 15, 15)  3 //1
+  22  DropoutLayer                 (64, 256, 15, 15)   [0.40]
+  23  Conv2DDNNLayer               (64, 256, 15, 15)  3 //1
+  24  DropoutLayer                 (64, 256, 15, 15)   [0.40]
+  25  Conv2DDNNLayer               (64, 256, 15, 15)  3 //1
+  26  MaxPool2DDNNLayer            (64, 256, 7, 7)  3 //2
+  27  DropoutLayer                 (64, 256, 7, 7)   [0.50]
+  28  DenseLayer                   (64, 1024)  
+  29  FeaturePoolLayer             (64, 512)  2 //
+  30  InputLayer                   (64, 2)  
+  31  ConcatLayer                  (64, 514)  
+  32  ReshapeLayer                 (32, 1028)  
+  33  DropoutLayer                 (32, 1028)   [0.50]
+  34  DenseLayer                   (32, 1024)  
+  35  FeaturePoolLayer             (32, 512)  2 //
+  36  DropoutLayer                 (32, 512)   [0.50]
+  37  DenseLayer                   (32, 10)  
+  38  ReshapeLayer                 (64, 5)  
+  39  ApplyNonlinearity            (64, 5)  
+
+
+        Number of trainable parameters: 20923690
+        '''
+        
     #model_name = "L7"
     layers = []
 
@@ -1800,6 +1845,8 @@ def build_LUCERO_model_7():
                          untie_biases=True)
     layers.append(l_conv)
 
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
+
     #layer 4
     l_conv = Conv2DLayer(layers[-1],
                          num_filters=32, filter_size=(3, 3), stride=(1, 1),
@@ -1824,6 +1871,8 @@ def build_LUCERO_model_7():
                          untie_biases=True)
     layers.append(l_conv)
 
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
+
     #layer 7
     l_conv = Conv2DLayer(layers[-1],
                          num_filters=64, filter_size=(3, 3), stride=(1, 1),
@@ -1845,13 +1894,7 @@ def build_LUCERO_model_7():
                          untie_biases=True)
     layers.append(l_conv)
 
-    l_conv = Conv2DLayer(layers[-1],
-                         num_filters=128, filter_size=(3, 3), stride=(1, 1),
-                         pad='same',
-                         nonlinearity=LeakyRectify(leakiness),
-                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-                         untie_biases=True)
-    layers.append(l_conv)
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
 
     l_conv = Conv2DLayer(layers[-1],
                          num_filters=128, filter_size=(3, 3), stride=(1, 1),
@@ -1860,6 +1903,18 @@ def build_LUCERO_model_7():
                          W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
                          untie_biases=True)
     layers.append(l_conv)
+
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=128, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
 
     l_conv = Conv2DLayer(layers[-1],
                          num_filters=128, filter_size=(3, 3), stride=(1, 1),
@@ -1880,13 +1935,7 @@ def build_LUCERO_model_7():
                          untie_biases=True)
     layers.append(l_conv)
 
-    l_conv = Conv2DLayer(layers[-1],
-                         num_filters=256, filter_size=(3, 3), stride=(1, 1),
-                         pad='same',
-                         nonlinearity=LeakyRectify(leakiness),
-                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-                         untie_biases=True)
-    layers.append(l_conv)
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
 
     l_conv = Conv2DLayer(layers[-1],
                          num_filters=256, filter_size=(3, 3), stride=(1, 1),
@@ -1895,6 +1944,18 @@ def build_LUCERO_model_7():
                          W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
                          untie_biases=True)
     layers.append(l_conv)
+    
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=256, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    layers.append(nn.layers.DropoutLayer(layers[-1], p=0.4))
 
     l_conv = Conv2DLayer(layers[-1],
                          num_filters=256, filter_size=(3, 3), stride=(1, 1),
