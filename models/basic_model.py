@@ -366,7 +366,40 @@ def build_model():
 
 def build_LUCERO_model_1():
     '''
-    Layer 1 changed filter from 5//2 to 3//1 per inception net
+   Number of trainable parameters: 10066986
+   0  InputLayer                   (64, 3, 512, 512)  
+   1  Conv2DDNNLayer               (64, 32, 256, 256)  5 //2
+   2  MaxPool2DDNNLayer            (64, 32, 127, 127)  3 //2
+   3  Conv2DDNNLayer               (64, 32, 127, 127)  3 //1
+   4  Conv2DDNNLayer               (64, 32, 127, 127)  3 //1
+   5  MaxPool2DDNNLayer            (64, 32, 63, 63)  3 //2
+   6  Conv2DDNNLayer               (64, 64, 63, 63)  3 //1
+   7  Conv2DDNNLayer               (64, 64, 63, 63)  3 //1
+   8  MaxPool2DDNNLayer            (64, 64, 31, 31)  3 //2
+   9  Conv2DDNNLayer               (64, 128, 31, 31)  3 //1
+  10  Conv2DDNNLayer               (64, 128, 31, 31)  3 //1
+  11  MaxPool2DDNNLayer            (64, 128, 15, 15)  3 //2
+  12  Conv2DDNNLayer               (64, 128, 15, 15)  3 //1
+  13  Conv2DDNNLayer               (64, 128, 15, 15)  3 //1
+  14  MaxPool2DDNNLayer            (64, 128, 7, 7)  3 //2
+  15  Conv2DDNNLayer               (64, 256, 7, 7)  3 //1
+  16  Conv2DDNNLayer               (64, 256, 7, 7)  3 //1
+  17  Conv2DDNNLayer               (64, 256, 7, 7)  3 //1
+  18  Conv2DDNNLayer               (64, 256, 7, 7)  3 //1
+  19  MaxPool2DDNNLayer            (64, 256, 3, 3)  3 //2
+  20  DropoutLayer                 (64, 256, 3, 3)   [0.50]
+  21  DenseLayer                   (64, 1024)  
+  22  FeaturePoolLayer             (64, 512)  2 //
+  23  InputLayer                   (64, 2)  
+  24  ConcatLayer                  (64, 514)  
+  25  ReshapeLayer                 (32, 1028)  
+  26  DropoutLayer                 (32, 1028)   [0.50]
+  27  DenseLayer                   (32, 1024)  
+  28  FeaturePoolLayer             (32, 512)  2 //
+  29  DropoutLayer                 (32, 512)   [0.50]
+  30  DenseLayer                   (32, 10)  
+  31  ReshapeLayer                 (64, 5)  
+  32  ApplyNonlinearity            (64, 5)  
     Inserted Max pool at layer 10-11
     '''
     layers = []
@@ -594,8 +627,40 @@ def build_LUCERO_model_1():
 
 def build_LUCERO_model_2(): #9mill params
     '''
-    Layer 1 changed filter from 5//2 to 3//1 per inception net
-    Inserted Max pool at layer 10-11
+   0  InputLayer                   (64, 3, 512, 512)
+   1  Conv2DDNNLayer               (64, 32, 256, 256)  5 //2
+   2  MaxPool2DDNNLayer            (64, 32, 127, 127)  3 //2
+   3  Conv2DDNNLayer               (64, 32, 127, 127)  3 //1
+   4  Conv2DDNNLayer               (64, 32, 127, 127)  3 //1
+   5  MaxPool2DDNNLayer            (64, 32, 63, 63)  3 //2
+   6  Conv2DDNNLayer               (64, 64, 63, 63)  3 //1
+   7  Conv2DDNNLayer               (64, 64, 63, 63)  3 //1
+   8  MaxPool2DDNNLayer            (64, 64, 31, 31)  3 //2
+   9  Conv2DDNNLayer               (64, 128, 31, 31)  3 //1
+  10  Conv2DDNNLayer               (64, 128, 31, 31)  3 //1
+  11  MaxPool2DDNNLayer            (64, 128, 15, 15)  3 //2
+  12  Conv2DDNNLayer               (64, 256, 15, 15)  3 //1
+  13  Conv2DDNNLayer               (64, 256, 15, 15)  3 //1
+  14  MaxPool2DDNNLayer            (64, 256, 7, 7)  3 //2
+  15  Conv2DDNNLayer               (64, 256, 7, 7)  3 //1
+  16  MaxPool2DDNNLayer            (64, 256, 3, 3)  3 //2
+  17  DropoutLayer                 (64, 256, 3, 3)   [0.50]
+  18  DenseLayer                   (64, 1024)
+  19  FeaturePoolLayer             (64, 512)  2 //
+  20  InputLayer                   (64, 2)
+  21  ConcatLayer                  (64, 514)
+  22  ReshapeLayer                 (32, 1028)
+  23  DropoutLayer                 (32, 1028)   [0.50]
+  24  DenseLayer                   (32, 1024)
+  25  FeaturePoolLayer             (32, 512)  2 //
+  26  DropoutLayer                 (32, 512)   [0.50]
+  27  DenseLayer                   (32, 10)
+  28  ReshapeLayer                 (64, 5)
+  29  ApplyNonlinearity            (64, 5)
+
+
+                Number of trainable parameters: 9202218
+
     '''
     layers = []
 
@@ -825,11 +890,50 @@ def build_LUCERO_model_2(): #9mill params
 
     return l_out, l_ins
 
-def build_LUCERO_model_3(): #24mil params
+def build_LUCERO_model_3():
+    #leakiness changed from .5 to .3
+    leakiness=0.3
     '''
-    Layer 1 changed filter from 5//2 to 3//1 per inception net
-    Inserted Max pool at layer 10-11
+     0  InputLayer                   (64, 3, 512, 512)  
+   1  Conv2DDNNLayer               (64, 32, 256, 256)  5 //2
+   2  Conv2DDNNLayer               (64, 32, 128, 128)  5 //2
+   3  Conv2DDNNLayer               (64, 32, 128, 128)  3 //1
+   4  Conv2DDNNLayer               (64, 32, 128, 128)  3 //1
+   5  MaxPool2DDNNLayer            (64, 32, 63, 63)  3 //2
+   6  Conv2DDNNLayer               (64, 64, 63, 63)  3 //1
+   7  Conv2DDNNLayer               (64, 64, 63, 63)  3 //1
+   8  Conv2DDNNLayer               (64, 64, 63, 63)  3 //1
+   9  MaxPool2DDNNLayer            (64, 64, 31, 31)  3 //2
+  10  Conv2DDNNLayer               (64, 128, 31, 31)  3 //1
+  11  Conv2DDNNLayer               (64, 128, 31, 31)  3 //1
+  12  Conv2DDNNLayer               (64, 128, 31, 31)  3 //1
+  13  Conv2DDNNLayer               (64, 128, 31, 31)  3 //1
+  14  MaxPool2DDNNLayer            (64, 128, 15, 15)  3 //2
+  15  Conv2DDNNLayer               (64, 256, 15, 15)  3 //1
+  16  Conv2DDNNLayer               (64, 256, 15, 15)  3 //1
+  17  Conv2DDNNLayer               (64, 256, 15, 15)  3 //1
+  18  Conv2DDNNLayer               (64, 256, 15, 15)  3 //1
+  19  MaxPool2DDNNLayer            (64, 256, 7, 7)  3 //2
+  20  DropoutLayer                 (64, 256, 7, 7)   [0.50]
+  21  DenseLayer                   (64, 1024)  
+  22  FeaturePoolLayer             (64, 512)  2 //
+  23  InputLayer                   (64, 2)  
+  24  ConcatLayer                  (64, 514)  
+  25  ReshapeLayer                 (32, 1028)  
+  26  DropoutLayer                 (32, 1028)   [0.50]
+  27  DenseLayer                   (32, 1024)  
+  28  FeaturePoolLayer             (32, 512)  2 //
+  29  DropoutLayer                 (32, 512)   [0.50]
+  30  DenseLayer                   (32, 10)  
+  31  ReshapeLayer                 (64, 5)  
+  32  ApplyNonlinearity            (64, 5)  
+
+
+        Number of trainable parameters: 21778474
+
     '''
+    
+    
     layers = []
 
     l_in_imgdim = nn.layers.InputLayer(
@@ -850,16 +954,23 @@ def build_LUCERO_model_3(): #24mil params
 
     #layer 1
     l_conv = Conv2DLayer(layers[-1],
-                         num_filters=32, filter_size=(5, 5), stride=(2,2),
+                         num_filters=32, filter_size=(5, 5), stride=(2, 2),
                          pad='same',
                          nonlinearity=LeakyRectify(leakiness),
                          W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
                          untie_biases=True)
     layers.append(l_conv)
     
-    #layer 2
-#     l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
-#     layers.append(l_pool)
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=32, filter_size=(5, 5), stride=(2, 2),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+    
+    
+    
 
     #layer 3
     l_conv = Conv2DLayer(layers[-1],
@@ -872,14 +983,22 @@ def build_LUCERO_model_3(): #24mil params
 
     #layer 4
     l_conv = Conv2DLayer(layers[-1],
-                         num_filters=48, filter_size=(3, 3), stride=(1, 1),
+                         num_filters=32, filter_size=(3, 3), stride=(1, 1),
                          pad='same',
                          nonlinearity=LeakyRectify(leakiness),
                          W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
                          untie_biases=True)
     layers.append(l_conv)
+    
 
-
+    # l_conv = Conv2DLayer(layers[-1],
+    #                      num_filters=32, filter_size=(3, 3), stride=(1, 1),
+    #                      pad='same',
+    #                      nonlinearity=LeakyRectify(leakiness),
+    #                      W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+    #                      untie_biases=True,
+    #                      learning_rate_scale=1.0)
+    # layers.append(l_conv)
 
     #layer 5
     l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
@@ -887,6 +1006,14 @@ def build_LUCERO_model_3(): #24mil params
 
     
     #layer 6
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=64, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+    
     l_conv = Conv2DLayer(layers[-1],
                          num_filters=64, filter_size=(3, 3), stride=(1, 1),
                          pad='same',
@@ -913,30 +1040,24 @@ def build_LUCERO_model_3(): #24mil params
     #                      learning_rate_scale=1.0)
     # layers.append(l_conv)
 
-    #layer 8
     l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
     layers.append(l_pool)
 
-    #layer 9
     l_conv = Conv2DLayer(layers[-1],
-                         num_filters=64, filter_size=(3, 3), stride=(1, 1),
+                         num_filters=128, filter_size=(3, 3), stride=(1, 1),
                          pad='same',
                          nonlinearity=LeakyRectify(leakiness),
                          W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
                          untie_biases=True)
     layers.append(l_conv)
 
-#     #layer 10
-#     l_conv = Conv2DLayer(layers[-1],
-#                          num_filters=128, filter_size=(3, 3), stride=(1, 1),
-#                          pad='same',
-#                          nonlinearity=LeakyRectify(leakiness),
-#                          W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-#                          untie_biases=True)
-#     layers.append(l_conv)
-
-    l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
-    layers.append(l_pool)
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=128, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
 
     l_conv = Conv2DLayer(layers[-1],
                          num_filters=128, filter_size=(3, 3), stride=(1, 1),
@@ -964,30 +1085,30 @@ def build_LUCERO_model_3(): #24mil params
                          W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
                          untie_biases=True)
     layers.append(l_conv)
-# 
-#     l_conv = Conv2DLayer(layers[-1],
-#                          num_filters=256, filter_size=(3, 3), stride=(1, 1),
-#                          pad='same',
-#                          nonlinearity=LeakyRectify(leakiness),
-#                          W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-#                          untie_biases=True)
-#     layers.append(l_conv)
-# 
-#     l_conv = Conv2DLayer(layers[-1],
-#                          num_filters=256, filter_size=(3, 3), stride=(1, 1),
-#                          pad='same',
-#                          nonlinearity=LeakyRectify(leakiness),
-#                          W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-#                          untie_biases=True)
-#     layers.append(l_conv)
-# 
-#     l_conv = Conv2DLayer(layers[-1],
-#                          num_filters=256, filter_size=(3, 3), stride=(1, 1),
-#                          pad='same',
-#                          nonlinearity=LeakyRectify(leakiness),
-#                          W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
-#                          untie_biases=True)
-#     layers.append(l_conv)
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=256, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=256, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=256, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
     l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2),
                             name='coarse_last_pool')
     layers.append(l_pool)
@@ -1208,10 +1329,30 @@ def build_LUCERO_model_4(): #8.7mill 128 chunk, 64 batch
 
     return l_out, l_ins
 
-def build_LUCERO_model_5(): #16.7mill
+def build_LUCERO_model_5(): #35.3mill
     '''
-    Layer 1 changed filter from 5//2 to 3//1 per inception net
-    Inserted Max pool at layer 10-11
+   0  InputLayer                   (64, 3, 512, 512)  
+   1  Conv2DDNNLayer               (64, 32, 256, 256)  7 //2
+   2  Conv2DDNNLayer               (64, 32, 128, 128)  3 //2
+   3  Conv2DDNNLayer               (64, 64, 128, 128)  3 //1
+   4  MaxPool2DDNNLayer            (64, 64, 63, 63)  3 //2
+   5  Conv2DDNNLayer               (64, 64, 63, 63)  3 //1
+   6  Conv2DDNNLayer               (64, 64, 63, 63)  3 //1
+   7  MaxPool2DDNNLayer            (64, 64, 31, 31)  3 //2
+   8  Conv2DDNNLayer               (64, 128, 31, 31)  3 //1
+   9  Conv2DDNNLayer               (64, 256, 31, 31)  3 //1
+  10  Conv2DDNNLayer               (64, 256, 31, 31)  3 //1
+  11  MaxPool2DDNNLayer            (64, 256, 15, 15)  3 //2
+  12  DropoutLayer                 (64, 256, 15, 15)   [0.50]
+  13  DenseLayer                   (64, 512)  
+  14  FeaturePoolLayer             (64, 256)  2 //
+  15  InputLayer                   (64, 2)  
+  16  ConcatLayer                  (64, 258)  
+  17  ReshapeLayer                 (32, 516)  
+  18  DropoutLayer                 (32, 516)   [0.50]
+  19  DenseLayer                   (32, 10)  
+  20  ReshapeLayer                 (64, 5)  
+  21  ApplyNonlinearity            (64, 5)  
     '''
     layers = []
 
@@ -1243,16 +1384,12 @@ def build_LUCERO_model_5(): #16.7mill
 
     #layer 3
     l_conv = Conv2DLayer(layers[-1],
-                         num_filters=64, filter_size=(3, 3), stride=(1, 1),
+                         num_filters=32, filter_size=(3, 3), stride=(2, 2),
                          pad='same',
                          nonlinearity=LeakyRectify(leakiness),
                          W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
                          untie_biases=True)
     layers.append(l_conv)
-
-    #layer 5
-    l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
-    layers.append(l_pool)
 
     
     #layer 6
@@ -1264,12 +1401,32 @@ def build_LUCERO_model_5(): #16.7mill
                          untie_biases=True)
     layers.append(l_conv)
 
-
-    #layer 8
+    #layer 5
     l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
     layers.append(l_pool)
 
+
     #layer 9
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=64, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+    
+    l_conv = Conv2DLayer(layers[-1],
+                         num_filters=64, filter_size=(3, 3), stride=(1, 1),
+                         pad='same',
+                         nonlinearity=LeakyRectify(leakiness),
+                         W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
+                         untie_biases=True)
+    layers.append(l_conv)
+
+
+    l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
+    layers.append(l_pool)
+
     l_conv = Conv2DLayer(layers[-1],
                          num_filters=128, filter_size=(3, 3), stride=(1, 1),
                          pad='same',
@@ -1279,9 +1436,6 @@ def build_LUCERO_model_5(): #16.7mill
     layers.append(l_conv)
 
 
-    l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
-    layers.append(l_pool)
-
     l_conv = Conv2DLayer(layers[-1],
                          num_filters=256, filter_size=(3, 3), stride=(1, 1),
                          pad='same',
@@ -1289,10 +1443,7 @@ def build_LUCERO_model_5(): #16.7mill
                          W=nn.init.Orthogonal(1.0), b=nn.init.Constant(0.1),
                          untie_biases=True)
     layers.append(l_conv)
-
-    l_pool = MaxPool2DLayer(layers[-1], pool_size=(3, 3), stride=(2, 2))
-    layers.append(l_pool)
-
+    
     l_conv = Conv2DLayer(layers[-1],
                          num_filters=256, filter_size=(3, 3), stride=(1, 1),
                          pad='same',

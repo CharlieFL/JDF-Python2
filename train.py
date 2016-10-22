@@ -20,11 +20,12 @@ from models import basic_model as model
 
 import sys
 #######My Config flags #########################################
-validateNow=False
+validateNow = False
 loadExistingModel = True
-existingFileNameToLoad = "Lucero_2016_10_16_084024_local_normal_512_kappalogclipped_logcutoff_0.8_reg_0.0002_0chunksUsed.pkl"
+existingFileNameToLoad = "Lucero_2016_10_20_102203_local_normal_512_kappalogclipped_logcutoff_0.8_reg_0.0002_6084chunksUsed.pkl"
 elementOffset = 0
-boolRemovePriorDumpFile = True
+boolRemovePriorDumpFile = False
+
 #########################################################################
 
 
@@ -45,9 +46,9 @@ if do_profile:
 LEARNING_RATE_SCHEDULE = model.LEARNING_RATE_SCHEDULE
 
 prefix_train = model.prefix_train if hasattr(model, 'prefix_train') else \
-    'F:/Research data/train_ds5_crop/'      #'/run/shm/train_ds2_crop/'
+    'F:/Research data/train_ds5_crop/'      
 prefix_test = model.prefix_test if hasattr(model, 'prefix_test') else \
-    'F:/Research data/test_ds5_crop/'       #'/run/shm/test_ds2_crop/'
+    'F:/Research data/test_ds5_crop/'       
 
 SEED = model.SEED if hasattr(model, 'SEED') else 11111
 
@@ -69,6 +70,7 @@ if loadExistingModel:
     
     f = open("C:\\Users\\Gargs\\workspace\\JDF Python2\\dumps\\" + existingFileNameToLoad, "rb")
     model_data = pickle.load(f)
+    f.close()
     chunk_size = model_data['chunk_size']
     batch_size = model_data['batch_size']
     
@@ -78,12 +80,11 @@ if loadExistingModel:
 
 #build fresh training model
 else:
-    l_out, l_ins = model.build_LUCERO_model_4()
+    l_out, l_ins = model.build_LUCERO_model_3()
     chunk_size = model.chunk_size
     batch_size = model.batch_size
     
 
-lastChunkValidated = 0 #incase of crash, when was the last save performed
 num_chunks_train = model.num_chunks_train  # 5000
 validate_every = model.validate_every  # 50
 if hasattr(model, 'output_every'):
@@ -552,12 +553,12 @@ for e, (xs_chunk, y_chunk, chunk_shape) in izip(chunks_train_ids,
     time_since_start = now - start_time
     time_since_prev = now - prev_time
     prev_time = now
-    est_time_left = time_since_start * \
-        ((num_chunks_train - (elementInd)) /
-         float(elementInd - chunks_train_ids[0]))
+    
+    est_time_left = time_since_start * ((num_chunks_train - elementInd)) / float(e+1) 
     eta = datetime.datetime.now() + \
         datetime.timedelta(seconds=est_time_left)
     eta_str = eta.strftime("%c")
+    
 
     print "  %s since start (%.2f s)" % (
         hms(time_since_start),
@@ -574,8 +575,10 @@ for e, (xs_chunk, y_chunk, chunk_shape) in izip(chunks_train_ids,
             ((elementInd) == num_chunks_train)):
         if elementInd != num_chunks_train: #change dump file to capture last chunk saved
             if boolRemovePriorDumpFile:
-                os.remove(dump_path)
+                os.remove(dump_path)   
             dump_path = 'dumps/Lucero_' + model_id + '_' + model.config_name + '_' + str(elementInd) + 'chunksUsed.pkl'
+        else:
+            dump_path = 'dumps/Lucero_' + model_id + '_' + model.config_name + 'FINAL.pkl'
         
         print "\nSaving model ..."
         with open(dump_path, 'wb') as f:
