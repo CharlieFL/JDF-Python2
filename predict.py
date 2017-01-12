@@ -30,14 +30,17 @@ startTime = time.time()
 #model_data = pickle.load(open(dump_path, 'r'))
 
 #dump_path = "C:\\Users\\Gargs\\workspace\\JDF Python2\\dumps\\2015_07_17_123003_PARAMSDUMP.pkl"
-#f = open("C:\\Users\\Gargs\\workspace\\JDF Python2\\dumps\\2015_07_17_123003.pkl", "rb")
+
+#### added 5/3/2016
+prefix_path = 'F:/Research data/'  #where is the root folder for images
+img_dir = prefix_path + 'test_ds5_crop/' #path to test images
+
+#full path to model to train.
+path_to_model = "F:\\Research data\\dumps\\L7\\Total dataset 2nd Train\\Lucero_2016_10_25_122157_local_normal_512_kappalogclipped_logcutoff_0.8_reg_0.0002_4914chunksUsed.pkl"
+#############################
 
 
-#f = open("C:\\Users\\Gargs\\workspace\\JDF Python2\\dumps\\Lucero_2016_10_03_075141.pkl", "rb")
-
-f = open("C:\\Users\\Gargs\\workspace\\JDF Python2\\dumps\\Lucero_2016_10_03_075141_converted.pkl", "rb")
-
-
+f = open(path_to_model, "rb")
 
 model_data = pickle.load(f)
 
@@ -84,8 +87,7 @@ compute_output = theano.function(
 # else:
 #     prefix_path = '/run/shm/'
 
-#### added 5/3/2016
-prefix_path = 'F:/Research data/'
+
 
 
 print "Using prefix path: %s.\n" % prefix_path
@@ -105,7 +107,7 @@ print "Using prefix path: %s.\n" % prefix_path
 
 ###  added 5/3/2016
 dataset = 'test'
-img_dir = prefix_path + 'test_ds5_crop/'
+
 
 
 

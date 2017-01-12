@@ -22,7 +22,7 @@ import sys
 #######My Config flags #########################################
 validateNow = False
 loadExistingModel = True
-existingFileNameToLoad = "Lucero_2016_10_20_102203_local_normal_512_kappalogclipped_logcutoff_0.8_reg_0.0002_6084chunksUsed.pkl"
+existingFileNameToLoad = "Lucero_2016_10_23_001206_local_normal_512_kappalogclipped_logcutoff_0.8_reg_0.0002_4914chunksUsed.pkl"
 elementOffset = 0
 boolRemovePriorDumpFile = False
 
@@ -80,7 +80,7 @@ if loadExistingModel:
 
 #build fresh training model
 else:
-    l_out, l_ins = model.build_LUCERO_model_3()
+    l_out, l_ins = model.build_LUCERO_model_7()
     chunk_size = model.chunk_size
     batch_size = model.batch_size
     
